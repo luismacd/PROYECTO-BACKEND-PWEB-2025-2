@@ -1,36 +1,41 @@
-const productos = [
-    {
-      id: 1,
-      titulo: "Playstation 5",
-      descripcion: "Consola de videojuegos",
-      precio: 2500.00,
-      categoria: "Consolas",
-      img: "https://plazavea.vteximg.com.br/arquivos/ids/29033795-1000-1000/20404194.jpg"
-    },
-    {
-      id: 2,
-      titulo: "Nintendo Switch 2",
-      descripcion: "Consola de videojuegos",
-      precio: 2900.00,
-      categoria: "Consolas",
-      img: "https://rimage.ripley.com.pe/home.ripley/Attachment/MKP/2534/PMP20000870001/full_image-1.jpeg"
-    },
-    {
-      id: 3,
-      titulo: "Ghost of Yotei Collector's Edition",
-      descripcion: "Edición de colección de Ghost of Yotei",
-      precio: 1000,
-      categoria: "Videojuegos",
-      img: "https://press-start.com.au/wp-content/uploads/2025/04/Ghost-of-YOtei-CE-1.jpg"
-    },
-    {
-      id: 4,
-      titulo: "EAFC26 Ultimate edition",
-      descripcion: "Edición Ultima de EAFC 26",
-      precio: 300,
-      categoria: "Videojuegos",
-      img: "https://gamescenter.pe/wp-content/uploads/2025/07/FC-26-Ultimate-Edition-PS5.webp"
-    }
-  ]
+const { DataTypes } = require("sequelize");
+const sequelize = require("../database");
 
-  export default productos;
+const Producto = sequelize.define("productos", {
+  id: {
+    primaryKey: true,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    allowNull: false
+  },
+  nombre: {
+    type: DataTypes.STRING(50),
+    allowNull: false
+  },
+  presentacion: {
+    type: DataTypes.STRING(50),
+    allowNull: false
+  },
+  descripcion: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
+  categoria: {
+    type: DataTypes.STRING(30),
+    allowNull: false
+  },
+  stock: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  },
+  imagen: {
+    type: DataTypes.STRING,
+    allowNull: true
+  }
+}, {
+  timestamps: false,
+  freezeTableName: true
+});
+
+module.exports = Producto;
